@@ -9,13 +9,13 @@
 import Foundation
 
 // helpers which often used
-private let bundle = NSBundle(forClass: SKPhotoBrowser.self)
+private let bundle = Bundle(for: SKPhotoBrowser.self)
 
 class SKButton: UIButton {
     var showFrame: CGRect!
     var hideFrame: CGRect!
     var insets: UIEdgeInsets {
-        return UI_USER_INTERFACE_IDIOM() == .Phone
+        return UI_USER_INTERFACE_IDIOM() == .phone
             ?  UIEdgeInsetsMake(15.25, 15.25, 15.25, 15.25) : UIEdgeInsetsMake(12, 12, 12, 12)
     }
     var size: CGSize = CGSize(width: 44, height: 44)
@@ -23,21 +23,21 @@ class SKButton: UIButton {
     
     var buttonTopOffset: CGFloat { return 5 }
     
-    func setup(imageName: String) {
-        backgroundColor = .clearColor()
+    func setup(_ imageName: String) {
+        backgroundColor = .clear
         imageEdgeInsets = insets
 //        clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = true
-        autoresizingMask = [.FlexibleBottomMargin, .FlexibleLeftMargin, .FlexibleRightMargin, .FlexibleTopMargin]
+        autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin]
         
         let image = UIImage(named: "SKPhotoBrowser.bundle/images/\(imageName)",
-                            inBundle: bundle, compatibleWithTraitCollection: nil) ?? UIImage()
-        setImage(image, forState: .Normal)
+                            in: bundle, compatibleWith: nil) ?? UIImage()
+        setImage(image, for: UIControlState())
     }
   
     func updateFrame() { }
   
-    func setFrameSize(size: CGSize) {
+    func setFrameSize(_ size: CGSize) {
         let newRect = CGRect(x: margin, y: buttonTopOffset, width: size.width, height: size.height)
         self.frame = newRect
         showFrame = newRect
@@ -78,7 +78,7 @@ class SKDeleteButton: SKButton {
     override func updateFrame() {
     }
   
-    override func setFrameSize(size: CGSize) {
+    override func setFrameSize(_ size: CGSize) {
         let newRect = CGRect(x: SKMesurement.screenWidth - size.width, y: buttonTopOffset, width: size.width, height: size.height)
         self.frame = newRect
         showFrame = newRect
